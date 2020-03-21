@@ -10,9 +10,9 @@
 name: OpenWrt-arm64
 
 on:
-  # push:
-  #    branches: 
-  #      - master
+ push:
+    branches: 
+      - master
   watch:
     types: [started]
   # schedule:
@@ -55,13 +55,7 @@ jobs:
       - name: FilePath
         run: |
           sed -i '5 r ./filepatch/arm64-default-settings' ./package/default-settings/files/zzz-default-settings
-          mkdir ./package/base-files/files/etc/openclash
-          curl -sL --connect-timeout 10 --retry 2 https://github.com/vernesong/OpenClash/releases/download/Clash/clash-linux-armv8.tar.gz -o ./package/base-files/files/etc/openclash/clash.tar.gz >/dev/null 2>&1
-          tar zxvf ./package/base-files/files/etc/openclash/clash.tar.gz -C ./package/base-files/files/etc/openclash >/dev/null 2>&1\
-          && rm -rf ./package/base-files/files/etc/openclash/clash.tar.gz >/dev/null 2>&1\
-          && chmod 4755 ./package/base-files/files/etc/openclash/clash\
-          && chown root:root ./package/base-files/files/etc/openclash/clash          
-          
+    
       - name: Update packages
         run: |
           cd package
