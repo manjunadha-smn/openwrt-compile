@@ -10,7 +10,7 @@
 name: OpenWrt-arm64
 
 on:
- push:
+  push:
     branches: 
       - master
   watch:
