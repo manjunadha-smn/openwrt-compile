@@ -10,9 +10,9 @@
 name: OpenWrt-arm64
 
 on:
-  #push:
-  #  branches: 
-  #    - master
+  push:
+    branches: 
+      - master
   watch:
     types: [started]
   # schedule:
@@ -109,6 +109,8 @@ jobs:
           CONFIG_TARGET_armvirt=y
           CONFIG_TARGET_armvirt_64=y
           CONFIG_TARGET_armvirt_64_Default=y
+          CONFIG_TARGET_PROFILE="Default"
+          CONFIG_TARGET_ARCH_PACKAGES="aarch64_generic"
           EOF
           # USB2.0支持:
           cat >> .config <<EOF
