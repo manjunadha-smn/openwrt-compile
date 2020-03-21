@@ -1,0 +1,4 @@
+uci set network.lan.ipaddr=192.168.123.1
+uci commit network
+
+uci set system.@system[0].hostname=MI-R3G
