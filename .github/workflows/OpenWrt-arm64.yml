@@ -10,9 +10,9 @@
 name: OpenWrt-arm64
 
 on:
-  push:
-    branches: 
-      - master
+  #push:
+  #  branches: 
+  #    - master
   watch:
     types: [started]
   # schedule:
@@ -49,8 +49,8 @@ jobs:
       - name: Clone Sound Code
         run: |
           git clone https://github.com/coolsnowwolf/lede
-          mv ./lean-lede/* .
-          rm -rf ./lean-lede
+          mv ./lede/* .
+          rm -rf ./lede
           
       - name: FilePath
         run: |
