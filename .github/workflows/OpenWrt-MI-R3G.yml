@@ -10,9 +10,9 @@
 name: OpenWrt-MI-R3G
 
 on:
-  push:
-     branches: 
-       - master
+  #push:
+  #   branches: 
+  #     - master
   watch:
     types: [started]
   # schedule:
