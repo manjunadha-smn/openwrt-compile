@@ -228,8 +228,8 @@ jobs:
           du -h --max-depth=1 ./ --exclude=build_dir --exclude=bin
           du -h --max-depth=1 ./build_dir
           du -h --max-depth=1 ./bin
-    - name: Assemble artifact
-      run: |
+      - name: Assemble artifact
+        run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
           find ./bin/targets/ -name "*default-rootfs*gz*" | xargs -i mv -f {} ./artifact/
