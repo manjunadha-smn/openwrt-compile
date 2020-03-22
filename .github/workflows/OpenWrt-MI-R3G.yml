@@ -10,9 +10,9 @@
 name: OpenWrt-MI-R3G
 
 on:
-  #push:
-  #   branches: 
-  #     - master
+  push:
+     branches: 
+       - master
   watch:
     types: [started]
   # schedule:
@@ -61,7 +61,7 @@ jobs:
           
       - name: FilePath
         run: |
-          sed -i '5 r ./filepatch/r3g-default-settings' ./package/default-settings/files/zzz-default-settings
+          sed -i '5 r ./filepatch/r3g-default-settings' ./package/lean/default-settings/files/zzz-default-settings
           
       - name: Update packages
         run: |
