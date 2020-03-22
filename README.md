@@ -1,3 +1,3 @@
-基于Lean大雕的openwrt源码的自动编译脚本
-点击右上角的Star自动开始编译
+基于Lean大雕的openwrt源码的自动编译脚本\n
+点击右上角的Star自动开始编译\n
 支持机型:Xiaomi R3G、基于Docker运行的arm64机型
