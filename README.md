@@ -1,1 +1,3 @@
-基于Lienol作者的openwrt源码的自动编译脚本
+基于Lean大雕的openwrt源码的自动编译脚本
+点击右上角的Star自动开始编译
+支持机型:Xiaomi R3G、基于Docker运行的arm64机型
