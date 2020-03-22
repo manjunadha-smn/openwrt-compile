@@ -56,8 +56,8 @@ jobs:
       - name: Clone Sound Code
         run: |
           git clone https://github.com/coolsnowwolf/lede
-          mv ./lean-lede/* .
-          rm -rf ./lean-lede
+          mv ./lede/* .
+          rm -rf ./lede
           
       - name: FilePath
         run: |
