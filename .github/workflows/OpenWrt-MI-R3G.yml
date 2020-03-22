@@ -53,7 +53,7 @@ jobs:
           # ln -s /mnt/openwrt/feeds ./feeds
           # ln -s /mnt/openwrt/staging_dir ./staging_dir
           df -h
-      - name: Get Sound Code
+      - name: Clone Sound Code
         run: |
           git clone -b dev-master https://github.com/Lienol/openwrt
           mv ./openwrt/* .
