@@ -10,9 +10,9 @@
 name: OpenWrt-arm64
 
 on:
-  push:
-    branches: 
-      - master
+  #push:
+  #  branches: 
+  #    - master
   watch:
     types: [started]
   # schedule:
@@ -48,14 +48,21 @@ jobs:
           df -h
       - name: Clone Sound Code
         run: |
-          git clone -b dev-19.07 https://github.com/Lienol/openwrt
+          git clone -b dev-master https://github.com/Lienol/openwrt
           mv ./openwrt/* .
           rm -rf ./openwrt
           
       - name: FilePath
         run: |
           sed -i '5 r ./filepatch/arm64-default-settings' ./package/default-settings/files/zzz-default-settings
-    
+          curl -sL --connect-timeout 10 --retry 2 https://github.com/vernesong/OpenClash/releases/download/Clash/clash-armv8.tar.gz -o /tmp/clash.tar.gz >/dev/null 2>&1
+          tar zxvf /tmp/clash.tar.gz -C /tmp >/dev/null 2>&1
+          rm -rf /tmp/clash.tar.gz >/dev/null 2>&1
+          mkdir ./package/base-files/files/etc/openclash
+          chmod 4755 /tmp/clash
+          chown root:root /tmp/clash
+          mv /tmp/clash ./package/base-files/files/etc/openclash/clash >/dev/null 2>&1
+          
       - name: Update packages
         run: |
           cd package
@@ -65,6 +72,7 @@ jobs:
           git clone https://github.com/1049066154/luci-app-serverchan
           git clone https://github.com/rosywrt/luci-theme-rosy
           git clone https://github.com/vernesong/OpenClash
+          #git clone https://github.com/jerrykuku/luci-app-vssr
           git clone https://github.com/rufengsuixing/luci-app-adguardhome
           git clone https://github.com/Baozisoftware/luci-app-koolproxy
           git clone https://github.com/project-openwrt/luci-app-unblockneteasemusic
@@ -149,7 +157,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_luci-app-flowoffload=y
           CONFIG_PACKAGE_luci-app-kodexplorer=y
-          CONFIG_PACKAGE_luci-app-vssr
+          #CONFIG_PACKAGE_luci-app-vssr=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
@@ -159,7 +167,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-serverchan=y
           CONFIG_PACKAGE_luci-app-v2ray-server=y
           CONFIG_PACKAGE_luci-app-xlnetacc=y
-          CONFIG_PACKAGE_luci-app-smartdns
+          CONFIG_PACKAGE_luci-app-smartdns=y
           CONFIG_PACKAGE_luci-app-softethervpn=y
           CONFIG_PACKAGE_luci-app-sqm=y
           CONFIG_PACKAGE_luci-app-samba=y
@@ -200,8 +208,8 @@ jobs:
           CONFIG_DEFAULT_coremark=y
           CONFIG_PACKAGE_lscpu=y
           CONFIG_PACKAGE_lm-sensors=y
-          CONFIG_PACKAGE_libmaxminddb
-          CONFIG_PACKAGE_python3-maxminddb
+          CONFIG_PACKAGE_libmaxminddb=y
+          CONFIG_PACKAGE_python3-maxminddb=y
           CONFIG_PACKAGE_lm-sensors-detect=y
           EOF
           # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
