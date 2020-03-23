@@ -237,5 +237,11 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
-          name: OpenWrt-arm64-$(date +%m%d)
+          name: OpenWrt For arm64
+          path: ./bin/targets/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: OpenWrt-arm64-Rootfs
           path: ./artifact/
