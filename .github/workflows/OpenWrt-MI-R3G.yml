@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: OpenWrt-MI-R3G
+name: OpenWrt-MIR3G
 
 on:
   #push:
@@ -128,14 +128,21 @@ jobs:
           EOF
           # IPv6支持:
           cat >> .config <<EOF
+          CONFIG_IPV6=y
           CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
           CONFIG_PACKAGE_ipv6helper=y
+          CONFIG_KERNEL_IPV6=y
+          CONFIG_KERNEL_IPV6_MULTIPLE_TABLES=y
+          CONFIG_KERNEL_IPV6_SUBTREES=y
+          CONFIG_KERNEL_IPV6_MROUTE=y
+          CONFIG_BUSYBOX_DEFAULT_FEATURE_IPV6=y
+          CONFIG_PACKAGE_odhcpd-ipv6only=y
+          CONFIG_PACKAGE_odhcpd_ipv6only_ext_cer_id=0
           EOF
           # LuCI插件选择:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-app-aria2=y
           CONFIG_PACKAGE_luci-app-autoreboot=y
-          CONFIG_PACKAGE_luci-app-ddns=y
           CONFIG_DEFAULT_luci-app-flowoffload=y
           CONFIG_PACKAGE_luci-app-firewall=y
           CONFIG_PACKAGE_smartdns=y
@@ -166,6 +173,10 @@ jobs:
           # LuCI主题:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-theme-atmaterial=y
+          EOF
+          # IPV6配置
+          cat >> .config <<EOF
+
           EOF
           # 常用软件包:
           cat >> .config <<EOF
@@ -207,5 +218,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
-          name: OpenWrt-MIR3G-$(date +%m%d)
+          name: OpenWrt For MIR3G
           path: ./bin/targets/
