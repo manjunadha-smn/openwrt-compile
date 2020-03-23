@@ -8,3 +8,4 @@ uci set samba.cfg010f89.name=MI-R3G
 uci commit samba
 
 uci set system.@system[0].hostname=MI-R3G
+uci set system.ntp.enable_server=1
