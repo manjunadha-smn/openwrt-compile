@@ -3,3 +3,5 @@ uci set network.lan.gateway=192.168.123.1
 uci set network.lan.dns=192.168.123.1
 uci commit network
  
+chmod 4755 /etc/openclash/clash
+chown root:root /etc/openclash/clash
