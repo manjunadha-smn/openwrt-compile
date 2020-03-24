@@ -128,16 +128,8 @@ jobs:
           EOF
           # IPv6支持:
           cat >> .config <<EOF
-          CONFIG_IPV6=y
           CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
           CONFIG_PACKAGE_ipv6helper=y
-          CONFIG_KERNEL_IPV6=y
-          CONFIG_KERNEL_IPV6_MULTIPLE_TABLES=y
-          CONFIG_KERNEL_IPV6_SUBTREES=y
-          CONFIG_KERNEL_IPV6_MROUTE=y
-          CONFIG_BUSYBOX_DEFAULT_FEATURE_IPV6=y
-          CONFIG_PACKAGE_odhcpd-ipv6only=y
-          CONFIG_PACKAGE_odhcpd_ipv6only_ext_cer_id=0
           EOF
           # LuCI插件选择:
           cat >> .config <<EOF
