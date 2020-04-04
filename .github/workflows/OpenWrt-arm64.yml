@@ -192,9 +192,9 @@ jobs:
           CONFIG_PACKAGE_luci-ssl-openssl=y
           EOF
           # LuCI主题:
-          cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-theme-atmaterial=y
-          EOF
+          # cat >> .config <<EOF
+          # CONFIG_PACKAGE_luci-theme-atmaterial=y
+          # EOF
           # 常用软件包:
           cat >> .config <<EOF
           CONFIG_PACKAGE_curl=y
