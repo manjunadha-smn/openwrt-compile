@@ -70,7 +70,7 @@ jobs:
           cd openwrt-packages
           git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
           git clone https://github.com/pymumu/smartdns.git
-          git clone https://github.com/Apocalypsor/luci-app-smartdns.git
+          git clone https://github.com/pymumu/luci-app-smartdns -b lede luci-app-smartdns
           
       - name: Update feeds
         run: |
