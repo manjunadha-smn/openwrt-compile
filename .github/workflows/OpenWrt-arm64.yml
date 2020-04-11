@@ -67,7 +67,7 @@ jobs:
           git clone https://github.com/Baozisoftware/luci-app-koolproxy
           git clone https://github.com/project-openwrt/luci-app-unblockneteasemusic
           git clone https://github.com/pymumu/smartdns.git
-          git clone https://github.com/Apocalypsor/luci-app-smartdns.git
+          git clone https://github.com/pymumu/luci-app-smartdns -b lede luci-app-smartdns
           
       - name: FilePath
         run: |
