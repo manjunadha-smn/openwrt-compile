@@ -67,7 +67,7 @@ jobs:
           git clone https://github.com/Baozisoftware/luci-app-koolproxy
           git clone https://github.com/project-openwrt/luci-app-unblockneteasemusic
           git clone https://github.com/pymumu/smartdns.git
-          git clone https://github.com/1049066154/luci-app-smartdns
+          git clone https://github.com/Apocalypsor/luci-app-smartdns.git
           
       - name: FilePath
         run: |
@@ -174,7 +174,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-squid=y
           CONFIG_PACKAGE_luci-app-baidupcs-web=y
           CONFIG_PACKAGE_luci-app-frpc=y
-          CONFIG_PACKAGE_luci-app-unblockneteasemusic=y
           CONFIG_PACKAGE_luci-app-usb-printer=y
           CONFIG_PACKAGE_luci-app-upnp=y
           CONFIG_PACKAGE_luci-app-vsftpd=y
@@ -189,6 +188,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-koolproxy=y
           CONFIG_PACKAGE_luci-app-passwall=y
           CONFIG_PACKAGE_luci-ssl-openssl=y
+          CONFIG_PACKAGE_luci-app-unblockmusic=y
           EOF
           # LuCI主题:
           # cat >> .config <<EOF
@@ -200,7 +200,6 @@ jobs:
           CONFIG_PACKAGE_htop=y
           CONFIG_PACKAGE_wget=y
           CONFIG_PACKAGE_iptables-mod-nat-extra=y
-          CONFIG_PACKAGE_UnblockNeteaseMusic=y
           CONFIG_DEFAULT_coremark=y
           CONFIG_PACKAGE_lscpu=y
           CONFIG_PACKAGE_lm-sensors=y
