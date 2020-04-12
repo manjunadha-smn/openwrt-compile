@@ -67,7 +67,7 @@ jobs:
           git clone https://github.com/Baozisoftware/luci-app-koolproxy
           git clone https://github.com/project-openwrt/luci-app-unblockneteasemusic
           git clone https://github.com/pymumu/smartdns.git
-          git clone https://github.com/pymumu/luci-app-smartdns -b lede luci-app-smartdns
+          git clone https://github.com/1049066154/luci-app-smartdns
           
       - name: FilePath
         run: |
@@ -145,8 +145,6 @@ jobs:
           # LuCI插件选择:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-app-haproxy-tcp=y
-          CONFIG_PACKAGE_luci-app-oaf=y
-          CONFIG_PACKAGE_luci-app-smartinfo=y
           CONFIG_PACKAGE_luci-app-aria2=y
           CONFIG_PACKAGE_luci-app-autoreboot=y
           CONFIG_PACKAGE_luci-app-ddns=y
