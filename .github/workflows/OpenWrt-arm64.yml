@@ -24,7 +24,7 @@ jobs:
 
   build:
 
-    name: Build OpenWrt and release
+    name: Build OpenWrt
     runs-on: ubuntu-18.04
 
     steps:
