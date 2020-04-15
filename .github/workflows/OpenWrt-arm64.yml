@@ -10,9 +10,9 @@
 name: OpenWrt-arm64
 
 on:
-  #push:
-  #  branches: 
-  #    - master
+  push:
+    branches: 
+      - master
   watch:
     types: [started]
   # schedule:
@@ -73,7 +73,7 @@ jobs:
       - name: FilePath
         run: |
           sed -i '5 r ./filepatch/arm64-default-settings' ./package/lean/default-settings/files/zzz-default-settings
-          sed -i 's#thermal\/thermal_zone\*\/temp#hwmon\/hwmon0\/temp#g' ./package/openwrt-packages/luci-app-serverchan/root/usr/bin/serverchan/serverchan
+          sed -i 's#thermal\/thermal_zone\*\/temp#hwmon\/hwmon0\/temp1_input#g' ./package/openwrt-packages/luci-app-serverchan/root/usr/bin/serverchan/serverchan
           
       - name: Update feeds
         run: |
