@@ -10,9 +10,9 @@
 name: OpenWrt-arm64-test
 
 on:
-  #push:
-  #  branches: 
-  #    - master
+  push:
+    branches: 
+      - master
   watch:
     types: [started]
   # schedule:
@@ -81,7 +81,6 @@ jobs:
         run: |
           sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           ./scripts/feeds update -a
-          ./filepatch/smartdns.sh
           ./scripts/feeds install -a
       - name: Generate configuration file
         run: |
