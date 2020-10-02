@@ -44,9 +44,10 @@ jobs:
           sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
           sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
           sudo -E apt-get update
-          sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs gcc-multilib g++-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler antlr3 gperf swig rsync
+          sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-1804) tree
           sudo -E apt-get -y autoremove --purge
           sudo -E apt-get clean
+          sudo timedatectl set-timezone "Asia/Shanghai"
           df -h
           
       - name: Clone Sound Code
@@ -116,9 +117,18 @@ jobs:
           # 
           # 编译N1固件:
           cat >> .config <<EOF
+          CONFIG_MODULES=y
+          CONFIG_HAVE_DOT_CONFIG=y
           CONFIG_TARGET_armvirt=y
           CONFIG_TARGET_armvirt_64=y
           CONFIG_TARGET_armvirt_64_Default=y
+          CONFIG_HAS_SUBTARGETS=y
+          CONFIG_TARGET_BOARD="armvirt"
+          CONFIG_TARGET_SUBTARGET="64"
+          CONFIG_TARGET_PROFILE="Default"
+          CONFIG_TARGET_ARCH_PACKAGES="aarch64_generic"
+          CONFIG_DEFAULT_TARGET_OPTIMIZATION="-Os -pipe -mcpu=generic"
+          CONFIG_CPU_TYPE="generic"
           EOF
           # IPv6支持:
           cat >> .config <<EOF
@@ -142,11 +152,12 @@ jobs:
           CONFIG_PACKAGE_luci-app-smartdns=y
           CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
           CONFIG_PACKAGE_luci-app-serverchan=y
           CONFIG_PACKAGE_luci-app-v2ray-server=y
           CONFIG_PACKAGE_luci-app-sqm=y
@@ -180,14 +191,25 @@ jobs:
           cat >> .config <<EOF
           CONFIG_PACKAGE_curl=y
           CONFIG_PACKAGE_htop=y
+          CONFIG_PACKAGE_nano=y
+          CONFIG_PACKAGE_screen=y
+          CONFIG_PACKAGE_tree=y
+          CONFIG_PACKAGE_vim-fuller=y
           CONFIG_PACKAGE_wget=y
-          CONFIG_PACKAGE_iptables-mod-nat-extra=y
-          CONFIG_DEFAULT_coremark=y
-          CONFIG_PACKAGE_lscpu=y
-          CONFIG_PACKAGE_lm-sensors=y
-          CONFIG_PACKAGE_libmaxminddb=y
-          CONFIG_PACKAGE_python3-maxminddb=y
-          CONFIG_PACKAGE_lm-sensors-detect=y
+          CONFIG_PACKAGE_unzip=y
+          CONFIG_PACKAGE_e2fsprogs=y
+          CONFIG_PACKAGE_cifsmount=y
+          CONFIG_PACKAGE_perl=y
+          CONFIG_PACKAGE_perlbase-utf8=y
+          CONFIG_PACKAGE_blkid=y
+          CONFIG_PACKAGE_losetup=y
+          CONFIG_PACKAGE_uuidgen=y
+          CONFIG_PACKAGE_tar=y
+          CONFIG_PACKAGE_gawk=y
+          CONFIG_PACKAGE_getopt=y
+          CONFIG_PACKAGE_bash=y
+          CONFIG_PACKAGE_fdisk=y
+          CONFIG_PACKAGE_lsblk=y
           EOF
           # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
           # cat >> .config <<EOF
@@ -202,9 +224,10 @@ jobs:
       - name: Make download
         run: |
           make download -j8
-          find ./dl/ -size -1024c -exec rm -f {} \;
-          
+          find dl -size -1024c -exec ls -l {} \;
+          find dl -size -1024c -exec rm -f {} \;
           df -h
+          
       - name: Compile firmware
         run: |
           make -j$(nproc) || make -j1 V=s
