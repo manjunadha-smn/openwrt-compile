@@ -52,8 +52,10 @@ jobs:
           
       - name: Clone Sound Code
         run: |
-          git clone https://github.com/coolsnowwolf/lede openwrt
-          cd openwrt
+          git clone https://github.com/coolsnowwolf/lede
+          mv ./lede/* .
+          rm -rf ./lede
+          
       - name: Update packages
         run: |
           cd package
@@ -73,7 +75,6 @@ jobs:
           
       - name: Update feeds
         run: |
-          cd openwrt
           sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
@@ -118,6 +119,7 @@ jobs:
           CONFIG_TARGET_ROOTFS_TARGZ=y
           CONFIG_TARGET_UBIFS_FREE_SPACE_FIXUP=y
           CONFIG_TARGET_UBIFS_JOURNAL_SIZE=""
+          CONFIG_TARGET_ROOTFS_PARTSIZE=256
           EOF
           # IPv6支持:
           cat >> .config <<EOF
