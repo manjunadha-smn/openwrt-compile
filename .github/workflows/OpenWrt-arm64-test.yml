@@ -218,3 +218,10 @@ jobs:
         with:
           name: OpenWrt-arm64-Rootfs-test
           path: ./artifact/
+
+      - name: Upload release asset
+        if: github.event == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.YOURTOKEN }}
+          file: ./artifact/*
