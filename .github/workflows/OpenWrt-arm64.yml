@@ -10,9 +10,9 @@
 name: OpenWrt-arm64
 
 on:
-  #push:
-  #  branches: 
-  #    - master
+  push:
+    branches: 
+      - master
   watch:
     types: [started]
   # schedule:
@@ -152,6 +152,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-kodexplorer=y
           #CONFIG_PACKAGE_luci-app-vssr is not set
           CONFIG_PACKAGE_smartdns=y
+          CONFIG_PACKAGE_luci-app-cpufreq=y
           CONFIG_PACKAGE_luci-app-smartdns=y
           CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
